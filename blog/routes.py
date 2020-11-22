@@ -60,7 +60,7 @@ def login():
    if request.method == 'POST':
        if form.validate_on_submit():
            session['logged_in'] = True
-           session.permanent = True  # Use cookie to store session.
+           session.permanent = True  
            flash('You are now logged in.', 'success')
            return redirect(next_url or url_for('index'))
        else:
@@ -79,3 +79,20 @@ def logout():
 def list_drafts():
    drafts = Entry.query.filter_by(is_published=False).order_by(Entry.pub_date.desc())
    return render_template("drafts.html", drafts=drafts)
+
+
+@app.route("/delete-post/<int:entry_id>", methods=['POST'])
+@login_required
+def delete_entry(entry_id):
+    entry = Entry.query.filter_by(id=entry_id).first_or_404()
+    db.session.delete(entry)
+    db.session.commit()
+    flash('Post deleted', 'success')
+    all_posts = Entry.query.filter_by(is_published=True).order_by(Entry.pub_date.desc())
+    return render_template("homepage.html", all_posts=all_posts)
+    
+    
+
+
+
+
