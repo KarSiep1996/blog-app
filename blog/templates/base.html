@@ -5,7 +5,7 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <meta name="description" content="">
- <title>Mój pierwszy blog</title>
+ <title>Mój blog</title>
 
  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/starter-template/">
 
@@ -22,16 +22,22 @@
 
 <body>
  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-   <a class="navbar-brand" href="#">Mój blog</a>
-    {% if session.logged_in %}
-      <form class="form-inline my-2 my-lg-0" action="{{ url_for('index') }}" method="GET">
-        <button class="btn btn-secondary my-2 my-sm-0">Strona główna</button>
+   <a class="navbar-brand" href="{{url_for('index')}}" style="margin-right: 20px; font-size: x-large;">Mój blog</a>
+      <form class="form-inline my-2 my-lg-0" action="{{url_for('about_me')}}" method="GET">
+        <button class="btn btn-secondary my-2 my-sm-0" style="margin-left: 5px;">O mnie</button>
       </form>
+      <form class="form-inline my-2 my-lg-0" action="{{ url_for('index') }}" method="GET">
+        <button class="btn btn-secondary my-2 my-sm-0" style="margin-left: 5px;">Blog</button>
+      </form>
+      <form class="form-inline my-2 my-lg-0" action="{{ url_for('contact_me') }}" method="GET">
+        <button class="btn btn-secondary my-2 my-sm-0" style="margin-left: 5px;">Kontakt</button>
+      </form>
+    {% if session.logged_in %}
       <form class="form-inline my-2 my-lg-0" action="{{ url_for('create_entry') }}" method="GET">
-        <button class="btn btn-secondary my-2 my-sm-0">Nowy post</button>
+        <button class="btn btn-secondary my-2 my-sm-0" style="margin-left: 5px;">Nowy post</button>
       </form>
       <form class="form-inline my-2 my-lg-0" action="{{ url_for('list_drafts') }}" method="GET">
-        <button class="btn btn-secondary my-2 my-sm-0">Szkice</button>
+        <button class="btn btn-secondary my-2 my-sm-0" style="margin-left: 5px;">Szkice</button>
       </form>
     {% endif %}
 
