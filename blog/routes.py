@@ -40,6 +40,13 @@ def index():
     all_posts = Entry.query.filter_by(is_published=True).order_by(Entry.pub_date.desc())
     return render_template("homepage.html", all_posts=all_posts)
 
+@app.route("/about-me")
+def about_me():
+    return render_template("about_me.html")
+
+@app.route("/contact-me")
+def contact_me():
+    return render_template("contact_me.html")
 
 @app.route("/new-post/", methods=["GET", "POST"])
 @login_required
