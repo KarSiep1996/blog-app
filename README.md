@@ -1,2 +1,3 @@
 # blog-app
-Blog application that was made with the use of following technologies: Flask, WTForms, SQLAlchemy, Bootstrap. 
+Personal blog application. Following technologies have been used while working on this project: Python, Flask, HTML, CSS, Bootstrap, SQLAlchemy, WTForms. Development of the application  is still in progress. Link to blog-app on heroku: https://my-personal-blog-application.herokuapp.com/
+
