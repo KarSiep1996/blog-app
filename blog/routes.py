@@ -81,6 +81,16 @@ def logout():
        flash('You are now logged out.', 'success')
    return redirect(url_for('index'))
 
+@app.route('/search/')
+def search():
+    results = []
+    search_query = request.args.get("q", "")
+    all_posts = Entry.query.filter_by(is_published=True).order_by(Entry.pub_date.desc())
+    for post in all_posts:
+        if search_query in post.title:
+            results = results + [post] 
+    return render_template("search.html", results = results)
+
 @app.route("/drafts/", methods=['GET'])
 @login_required
 def list_drafts():
