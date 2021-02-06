@@ -47,7 +47,8 @@ def about_me():
 
 @app.route("/contact-me", methods=['GET', 'POST'])
 def contact_me():
-    return render_template("contact_me.html")
+    #return render_template("contact_me.html")
+    return render_template("to_be_soon.html")
 
 @app.route('/send-email/', methods=['POST', 'GET'])
 def send_email():
