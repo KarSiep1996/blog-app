@@ -1,8 +1,9 @@
 from flask import render_template, request, session, flash, redirect, url_for
-from blog import app
+from blog import app, mail
 from blog.models import Entry, db
 from blog.forms import EntryForm, LoginForm
 import functools
+from flask_mail import Mail, Message
 
 def login_required(view_func):
    @functools.wraps(view_func)
@@ -44,9 +45,18 @@ def index():
 def about_me():
     return render_template("about_me.html")
 
-@app.route("/contact-me")
+@app.route("/contact-me", methods=['GET', 'POST'])
 def contact_me():
     return render_template("contact_me.html")
+
+@app.route('/send-email/', methods=['POST', 'GET'])
+def send_email():
+    data=request.args
+    message_title = "Message from " + data['name']+ ' ' + data['surname'] + ", " + data['email']
+    msg = Message(message_title, sender = 'ancymonka1996@gmail.com', recipients = ['ancymonka1996@gmail.com'])
+    msg.body = data['message']
+    mail.send(msg)
+    return render_template("about_me.html")
 
 @app.route("/new-post/", methods=["GET", "POST"])
 @login_required
